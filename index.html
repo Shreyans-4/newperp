@@ -122,16 +122,16 @@
       pointer-events:none;
       z-index:0;
     }
-    /* 3D square styles - now darker */
+    /* 3D square styles - much darker */
     .square-3d {
       position: absolute;
       width: 80px; height: 80px;
-      border: 2px solid hsl(262,80%,37%);
+      border: 2.5px solid #220043;
       border-radius: 0.2rem;
       box-sizing: border-box;
-      opacity: 0.93;
-      will-change: transform;
+      opacity: 0.95;
       background: transparent;
+      will-change: transform;
     }
     /* Add a mesh gradient overlay */
     .gradient-mesh {
@@ -141,11 +141,11 @@
       background: var(--gradient-mesh);
       pointer-events: none;
     }
-    /* Center the hero section absolutely, text right-aligned */
+    /* Hero section, text and illy right-aligned */
     .hero-container {
       display: flex;
       flex-direction:column;
-      align-items:flex-end;
+      align-items: flex-end;
       justify-content:center;
       min-height:100vh;
       padding-top:100px;
@@ -164,16 +164,15 @@
       margin-bottom:1rem;
       line-height:1.15;
       text-align:right;
-      max-width: 800px;
-      margin-right:0;
+      max-width: 900px;
     }
     .hero-highlight {
       background: linear-gradient(90deg,var(--primary),var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip:text;
-      font-weight:800;
       text-fill-color: transparent;
+      font-weight:800;
     }
     .hero-desc {
       font-size: 1.125rem;
@@ -222,7 +221,7 @@
       width: 1.2em; height: 1.2em;vertical-align:middle;
       transition: transform 0.3s;
     }
-    /* Right: Illustration + glow, right aligned */
+    /* Right-aligned illustration */
     .illustration-wrap {
       position: relative;
       display: flex;
@@ -364,7 +363,6 @@
     });
 
     // --- 3D moving squares animation ---
-    // Now creates 24 much darker boxes
     function create3DSquares() {
       const canvas = document.getElementById("background-canvas");
       canvas.innerHTML = "";
@@ -389,9 +387,9 @@
         let duration = 10 + Math.random()*10;
         let delay = Math.random()*8;
         let keyframes = [
-          { transform: `perspective(350px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg) translate(0,0)`, opacity:0.93 },
-          { transform: `perspective(350px) rotateX(${rotX+24}deg) rotateY(${rotY+38}deg) rotateZ(${rotZ+170}deg) translate(45px,65px)`, opacity:0.93 },
-          { transform: `perspective(350px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ+360}deg) translate(0,0)`, opacity:0.93 },
+          { transform: `perspective(350px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg) translate(0,0)`, opacity:0.95 },
+          { transform: `perspective(350px) rotateX(${rotX+24}deg) rotateY(${rotY+38}deg) rotateZ(${rotZ+170}deg) translate(45px,65px)`, opacity:0.95 },
+          { transform: `perspective(350px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ+360}deg) translate(0,0)`, opacity:0.95 },
         ];
         div.animate(keyframes, {
           duration: duration * 1000,
