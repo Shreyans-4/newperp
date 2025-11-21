@@ -73,7 +73,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip:text;
-      text-fill-color: transparent;
     }
     .nav-links {
       display: flex;
@@ -123,14 +122,14 @@
       pointer-events:none;
       z-index:0;
     }
-    /* 3D square styles */
+    /* 3D square styles - now darker */
     .square-3d {
       position: absolute;
       width: 80px; height: 80px;
-      border: 2px solid hsl(262,80%,60%,0.16);
+      border: 2px solid hsl(262,80%,37%);
       border-radius: 0.2rem;
       box-sizing: border-box;
-      opacity: 0.8;
+      opacity: 0.93;
       will-change: transform;
       background: transparent;
     }
@@ -142,17 +141,19 @@
       background: var(--gradient-mesh);
       pointer-events: none;
     }
-    /* Center the hero section absolutely */
+    /* Center the hero section absolutely, text right-aligned */
     .hero-container {
-      display:flex;
+      display: flex;
       flex-direction:column;
+      align-items:flex-end;
       justify-content:center;
-      align-items:center;
       min-height:100vh;
       padding-top:100px;
       padding-bottom:40px;
       position:relative;
       z-index:1;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     @media (max-width:600px){
       .hero-container {padding-top:80px;}
@@ -162,26 +163,26 @@
       font-weight:800;
       margin-bottom:1rem;
       line-height:1.15;
-      text-align:center;
-      max-width: 700px;
-      margin-left:auto; margin-right:auto;
+      text-align:right;
+      max-width: 800px;
+      margin-right:0;
     }
     .hero-highlight {
       background: linear-gradient(90deg,var(--primary),var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip:text;
-      text-fill-color: transparent;
       font-weight:800;
+      text-fill-color: transparent;
     }
     .hero-desc {
       font-size: 1.125rem;
       color: var(--muted-foreground);
       margin-bottom: 2rem;
       line-height: 1.7;
-      text-align:center;
+      text-align:right;
       max-width: 500px;
-      margin-left:auto; margin-right:auto;
+      margin-right:0;
     }
     .hero-link {
       color: var(--primary);
@@ -210,6 +211,7 @@
       gap: 0.7em;
       margin-top: 20px;
       margin-bottom: 40px;
+      float: right;
     }
     .hero-btn:hover {
       box-shadow: 0 16px 48px -8px hsl(262 80% 60% / 0.6);
@@ -220,14 +222,15 @@
       width: 1.2em; height: 1.2em;vertical-align:middle;
       transition: transform 0.3s;
     }
-    /* Right: Illustration + glow */
+    /* Right: Illustration + glow, right aligned */
     .illustration-wrap {
       position: relative;
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
       margin-bottom: 40px;
       margin-top: 20px;
+      width: 100%;
     }
     .illustration-content {
       position: relative;
@@ -273,6 +276,21 @@
       margin-left:auto; margin-right:auto;
       margin-bottom: 2rem;
     }
+    @media (max-width: 768px) {
+      .hero-container {
+        align-items: flex-end;
+      }
+      .hero-headline,
+      .hero-desc {
+        text-align: right;
+        margin-right: 0;
+      }
+      .profiles-section h2,
+      .profiles-section p {
+        text-align: center;
+        margin: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -303,7 +321,7 @@
   </header>
   
   <main>
-    <!-- HERO SECTION - Centered Vertically & Horizontally -->
+    <!-- HERO SECTION - Right aligned -->
     <section class="hero-container">
       <h1 class="hero-headline">
         Dive Into Skill Swap And <br>
@@ -331,7 +349,7 @@
     <section class="profiles-section">
       <h2 class="profiles-title">Meet Our Community</h2>
       <p class="profiles-desc">Connect with passionate learners and teachers from around the world</p>
-      <!-- Community cards ommited for brevity. Add your cards here. -->
+      <!-- Community cards omitted for brevity. Add your cards here. -->
     </section>
   </main>
   <script>
@@ -346,21 +364,21 @@
     });
 
     // --- 3D moving squares animation ---
-    // Creates 10 squares with varied size, speed, rotation/perspective
+    // Now creates 24 much darker boxes
     function create3DSquares() {
       const canvas = document.getElementById("background-canvas");
       canvas.innerHTML = "";
       const W = window.innerWidth, H = window.innerHeight;
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 24; i++) {
         let div = document.createElement("div");
         div.className = "square-3d";
         // random position
-        let left = Math.random() * (W-100);
-        let top = Math.random() * (H-100);
+        let left = Math.random() * (W-120);
+        let top = Math.random() * (H-120);
         div.style.left = left + "px";
         div.style.top = top + "px";
         // random size
-        let size = 60 + Math.random()*80;
+        let size = 50 + Math.random()*120;
         div.style.width = div.style.height = size + "px";
         // random perspective angles
         let rotX = Math.random()*60 - 30;
@@ -368,12 +386,12 @@
         let rotZ = Math.random()*360;
         div.style.transform = `perspective(350px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg)`;
         // animate with a custom keyframes
-        let duration = 10 + Math.random()*8;
-        let delay = Math.random()*6;
+        let duration = 10 + Math.random()*10;
+        let delay = Math.random()*8;
         let keyframes = [
-          { transform: `perspective(350px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg) translate(0,0)`, opacity:0.8 },
-          { transform: `perspective(350px) rotateX(${rotX+20}deg) rotateY(${rotY+30}deg) rotateZ(${rotZ+160}deg) translate(40px,60px)`, opacity:0.8 },
-          { transform: `perspective(350px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ+360}deg) translate(0,0)`, opacity:0.8 },
+          { transform: `perspective(350px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg) translate(0,0)`, opacity:0.93 },
+          { transform: `perspective(350px) rotateX(${rotX+24}deg) rotateY(${rotY+38}deg) rotateZ(${rotZ+170}deg) translate(45px,65px)`, opacity:0.93 },
+          { transform: `perspective(350px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ+360}deg) translate(0,0)`, opacity:0.93 },
         ];
         div.animate(keyframes, {
           duration: duration * 1000,
